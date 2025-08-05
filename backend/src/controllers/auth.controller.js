@@ -40,9 +40,9 @@ export async function signup(req,res){
             name: newUser.fullName,
             image: newUser.profilePic || "",
            });
-           console.log(`Strem user created for ${newUser.fullName}`);
+           console.log(`Stream user created for ${newUser.fullName}`);
         } catch (error) {
-            console.log("Error creating Strem user:",error);
+            console.log("Error creating Stream user:",error);
         }
 
         const token = jwt.sign({userId:newUser._id},process.env.JWT_SECRET_KEY,{
