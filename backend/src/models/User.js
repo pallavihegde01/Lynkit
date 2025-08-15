@@ -37,11 +37,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    gender: {
-      type: String,
-      enum: ["male", "female", "non-binary", "prefer not to say", "other"],
-      default: "",
-    },
     isOnboarded: {
       type: Boolean,
       default: false,
