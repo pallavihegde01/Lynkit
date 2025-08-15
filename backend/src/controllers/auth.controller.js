@@ -119,6 +119,12 @@ export async function onboard(req,res){
             });
         }
 
+        if (nativeLanguage.toLowerCase() === learningLanguage.toLowerCase()) {
+            return res.status(400).json({
+                message: "Native language and learning language cannot be the same",
+            });
+        }
+
         const updatedUser= await User.findByIdAndUpdate(
             userId,
             {
