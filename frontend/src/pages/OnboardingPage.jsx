@@ -14,7 +14,10 @@ const OnboardingPage = () => {
     fullName: authUser?.fullName || "",
     bio: authUser?.bio || "",
     nativeLanguage: authUser?.nativeLanguage || "",
+    customNativeLanguage: "",
     learningLanguage: authUser?.learningLanguage || "",
+    customLearningLanguage: "",
+    gender:authUser?.gender || "",
     location: authUser?.location || "",
     profilePic: authUser?.profilePic || "",
   });
@@ -33,7 +36,18 @@ const OnboardingPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onboardingMutation(formState);
+    const payload = {
+      ...formState,
+      nativeLanguage:
+        formState.nativeLanguage === "other"
+          ? formState.customNativeLanguage
+          : formState.nativeLanguage,
+      learningLanguage:
+        formState.learningLanguage === "other"
+          ? formState.customLearningLanguage
+          : formState.learningLanguage,
+    };
+    onboardingMutation(payload);
   }
 
   const handleRandomAvatar = () =>{
@@ -122,7 +136,19 @@ const OnboardingPage = () => {
                       {lang}
                     </option>
                   ))}
+                  <option value="other">Other</option>
                 </select>
+                {formState.nativeLanguage === "other" && (
+                  <input
+                    type="text"
+                    placeholder="Enter your native language"
+                    className="input input-bordered mt-2"
+                    value={formState.customNativeLanguage || ""}
+                    onChange={(e) =>
+                      setFormState({ ...formState, customNativeLanguage: e.target.value })
+                    }
+                  />
+                )}
               </div>
               {/* LEARNING LANGUAGE  */}
               <div className="form-control">
@@ -141,8 +167,39 @@ const OnboardingPage = () => {
                       {lang}
                     </option>
                   ))}
+                  <option value="other">Other</option>
                 </select>
+                {formState.learningLanguage === "other" && (
+                  <input
+                    type="text"
+                    placeholder="Enter the language you want to learn"
+                    className="input input-bordered mt-2"
+                    value={formState.customLearningLanguage || ""}
+                    onChange={(e) =>
+                      setFormState({ ...formState, customLearningLanguage: e.target.value })
+                    }
+                  />
+                )}
               </div>
+            </div>
+            {/* GENDER */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Gender</span>
+              </label>
+              <select
+                name="gender"
+                value={formState.gender}
+                onChange={(e) => setFormState({ ...formState, gender: e.target.value })}
+                className="select select-bordered w-full"
+              >
+                <option value="">Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="prefer not to say">Prefer not to say</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             {/* LOCATION  */}
             <div className="form-control">

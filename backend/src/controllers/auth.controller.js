@@ -104,7 +104,7 @@ export async function onboard(req,res){
     try {
         const userId = req.user._id;
 
-        const {fullName, bio, nativeLanguage, learningLanguage, location} = req.body;
+        const {fullName, bio, nativeLanguage, learningLanguage, gender, location} = req.body;
 
         if(!fullName || !bio || !nativeLanguage || !learningLanguage || !location){
                 return res.status(400).json({
@@ -114,6 +114,7 @@ export async function onboard(req,res){
                 !bio && "bio",
                 !nativeLanguage && "nativeLanguage",
                 !learningLanguage && "learningLanguage",
+                !gender && "gender",
                 !location && "location",
                 ].filter(Boolean),
             });
