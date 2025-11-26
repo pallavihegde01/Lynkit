@@ -1,5 +1,7 @@
 # Lynkit – Real-Time Communication Platform
 
+**Live Demo:** [Lynkit](https://lynkit.onrender.com/)
+
 A full-stack real-time communication platform that provides secure user authentication, instant chat messaging, and high-quality video calling. The application integrates Stream APIs for chat and video features while maintaining a smooth user experience with protected routes, onboarding flows, and modern UI components.
 
 ---
